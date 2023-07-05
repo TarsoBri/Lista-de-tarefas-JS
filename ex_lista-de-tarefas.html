@@ -19,6 +19,14 @@
             <br> Acrescentar eventos de click em cada li para marcar com feito.
             </h2> 
 
+            <input type="text" id="txtTarefa">
+            <button id="btn">Cadastrar tarefa</button>
+
+            <ul>
+                <li>Estudar Javascript - DOM</li>
+                <li>Estudar eventyos em Javascript</li>
+                <li>Jogar video-game</li>
+            </ul>
             
         </div>
 
@@ -27,9 +35,20 @@
             
             (function(){
                 'use strict';
-
+                
+                var $ul = document.querySelector('ul');
+                var $txtTarefa = document.querySelector('#txtTarefa');
+                var $btn = document.querySelector('#btn');
         
 
+                $btn.addEventListener('click', function(){
+                    var tarefa = '<li>'+ $txtTarefa.value + '</li>';
+                    $ul.innerHTML += tarefa;
+
+                    $txtTarefa.value = '';
+                    $txtTarefa.focus();
+
+                })
             })();
 
 
