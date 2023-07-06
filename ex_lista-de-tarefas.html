@@ -37,7 +37,7 @@
             </ul>
             
         </div>
-        
+
 
         <script>
             
@@ -50,16 +50,21 @@
                 var $btn = document.querySelector('#btn');
         
                 
+                $btn.addEventListener('click', addTarefa);
                 $txtTarefa.addEventListener('keyup', function(e){
                     if(e.keyCode === 13){
                         addTarefa();} 
                         // Add tarefa ao soltar o enter.
                 })
-                $btn.addEventListener('click', addTarefa);
                 
-                for(var i = 0; i < $lis.length; i++){
-                    $lis[i].addEventListener('click', verificaçãoFeitaa);
-                }
+
+                $ul.addEventListener('click', function(e){
+                    if(e.target.nodeName === 'LI'){
+                        verificaçãoFeita(e.target);
+                    }
+                })
+
+
 
 
                 function addTarefa(){
@@ -74,11 +79,11 @@
 
                     $txtTarefa.value = '';
                     $txtTarefa.focus();
-                }
+                  }
 
-                function verificaçãoFeitaa(){
-                    console.log("✔") 
-                    this.classList.toggle('verificado');
+
+                function verificaçãoFeita(li){
+                    li.classList.toggle('verificado');
                     //Adicionar classe a li
                 }
             })();
