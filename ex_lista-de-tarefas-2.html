@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Curso Javascript Completo 2018</title>
+        <meta charset="utf-8">      
+          
+        <style>
+            body{
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            li{
+                cursor: pointer;
+            }
+            .verificado{
+                text-decoration: line-through;
+                color: #666666;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div class="container">
+            <h1>Problema</h1>
+
+            <h2>Fazer uma lista de tarefas onde o usuário pode acrescentar um novo item (li) na lista (ul) através de um input e um botão. Esta lista deve estar preenchida previamente com três itens. 
+            <br> Acrescentar eventos de click em cada li para marcar com feito.
+            </h2> 
+
+            <input type="text" id="txtTarefa">
+            <button id="btn">Cadastrar tarefa</button>
+
+            <ul>
+                <li>Estudar Javascript - DOM</li>
+                <li>Estudar eventyos em Javascript</li>
+                <li>Jogar video-game</li>
+            </ul>
+            
+        </div>
+
+
+        <script>
+            
+            (function(){
+                'use strict';
+
+                var $ul = document.querySelector('ul');
+                var $lis = $ul.querySelectorAll('li');
+                var $txtTarefa = document.querySelector('#txtTarefa');
+                var $btn = document.querySelector('#btn');
+        
+                
+                $btn.addEventListener('click', addTarefa);
+                $txtTarefa.addEventListener('keyup', function(e){
+                    if(e.keyCode === 13){
+                        addTarefa();} 
+                        // Add tarefa ao soltar o enter.
+                })
+                
+
+                $ul.addEventListener('click', function(e){
+                    if(e.target.nodeName === 'LI'){
+                        removeTarefa(e.target);
+                    }
+                })
+
+
+
+
+                function addTarefa(){
+                    var li = document.createElement('li');
+                    // cria um elemento novo no DOM.
+                    var text = document.createTextNode($txtTarefa.value);
+                    // cria um texto temporario para ser atrelado em elmento do DOM.
+
+                    li.appendChild(text);
+                    $ul.appendChild(li);
+                    // É um método usado para adicionar um novo nó filho a um nó pai existente no DOM. Insira elementos HTML ou outros nós em um documento HTML.
+
+                    $txtTarefa.value = '';
+                    $txtTarefa.focus();
+                  }
+
+
+                function removeTarefa(li){
+                    if(confirm('Deseja realmente remover a tarefa \n'+ li.textContent +'?')){
+                        li.parentNode.removeChild(li);
+                    }
+                }
+            })();
+
+
+
+            
+        </script>
+        
+    </body>
+</html>
