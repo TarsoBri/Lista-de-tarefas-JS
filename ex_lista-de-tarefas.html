@@ -8,6 +8,14 @@
             body{
                 font-family: Arial, Helvetica, sans-serif;
             }
+
+            li{
+                cursor: pointer;
+            }
+            .verificado{
+                text-decoration: line-through;
+                color: #666666;
+            }
         </style>
     </head>
     
@@ -29,26 +37,50 @@
             </ul>
             
         </div>
-
+        
 
         <script>
             
             (function(){
                 'use strict';
-                
+
                 var $ul = document.querySelector('ul');
+                var $lis = $ul.querySelectorAll('li');
                 var $txtTarefa = document.querySelector('#txtTarefa');
                 var $btn = document.querySelector('#btn');
         
+                
+                $txtTarefa.addEventListener('keyup', function(e){
+                    if(e.keyCode === 13){
+                        addTarefa();} 
+                        // Add tarefa ao soltar o enter.
+                })
+                $btn.addEventListener('click', addTarefa);
+                
+                for(var i = 0; i < $lis.length; i++){
+                    $lis[i].addEventListener('click', verificaçãoFeitaa);
+                }
 
-                $btn.addEventListener('click', function(){
-                    var tarefa = '<li>'+ $txtTarefa.value + '</li>';
-                    $ul.innerHTML += tarefa;
+
+                function addTarefa(){
+                    var li = document.createElement('li');
+                    // cria um elemento novo no DOM.
+                    var text = document.createTextNode($txtTarefa.value);
+                    // cria um texto temporario para ser atrelado em elmento do DOM.
+
+                    li.appendChild(text);
+                    $ul.appendChild(li);
+                    // É um método usado para adicionar um novo nó filho a um nó pai existente no DOM. Insira elementos HTML ou outros nós em um documento HTML.
 
                     $txtTarefa.value = '';
                     $txtTarefa.focus();
+                }
 
-                })
+                function verificaçãoFeitaa(){
+                    console.log("✔") 
+                    this.classList.toggle('verificado');
+                    //Adicionar classe a li
+                }
             })();
 
 
